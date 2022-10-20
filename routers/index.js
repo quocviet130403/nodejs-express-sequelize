@@ -1,9 +1,11 @@
 const express = require('express');
-const stateRouter = require('./state.router');
+const { stateRouter } = require('./state.router');
 
-const rootRoute = express.Router();
+const rootRouter = express.Router();
 
-rootRoute.use('/state/',stateRouter);
+rootRouter.use('/', stateRouter);
 
-module.exports = rootRoute;
+module.exports = {
+    rootRouter
+};
 

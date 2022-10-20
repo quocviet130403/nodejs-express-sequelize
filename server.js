@@ -1,15 +1,13 @@
 const express = require('express');
-const rootRoute = require('./routers');
-const { Sequelize } = require('sequelize');
-const sequelize = new Sequelize('vexere', 'root', 'vietdz1304', {
-    host: 'localhost',
-    dialect: 'mysql',
-    port: '3308',
-});
-const app = express();
+const path = require('path');
+const { rootRouter } = require('./routers');
+const { sequelize } = require("./models")
 
+const app = express();
 app.use(express.json())
-app.use(rootRoute)
+const publicPathDirectory = path.join(__dirname,'./public');
+app.use(express.static(publicPathDirectory));
+app.use("/api/v1", rootRouter)
 
 sequelize.authenticate()
 .then(() => {
