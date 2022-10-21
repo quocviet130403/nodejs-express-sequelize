@@ -4,11 +4,11 @@ const { checkExist } = require('../middlewares/exist/checkExist')
 const { State } = require("../models");
 const stateRouter = express.Router();
 
-stateRouter.post('/states', addState)
-stateRouter.get('/states', getAllState)
-stateRouter.get('/states/:id', checkExist(State), getStateById)
-stateRouter.put('/states/:id', checkExist(State), updateStateById)
-stateRouter.delete('/states/:id', checkExist(State), deleteStateById)
+stateRouter.post('/', addState)
+stateRouter.get('/', getAllState)
+stateRouter.get('/:id', checkExist(State), getStateById)
+stateRouter.put('/:id', checkExist(State), updateStateById)
+stateRouter.delete('/:id', checkExist(State), deleteStateById)
 
 module.exports = {
     stateRouter
