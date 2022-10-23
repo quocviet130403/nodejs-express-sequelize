@@ -26,17 +26,33 @@ const login = async (req, res) => {
             const token = jwt.sign({
                 data: {email, password}
             }, 'vietdz1304', { expiresIn: 60 * 60 });
-            res.send({messange: "Đăng nhập thành công", token})
+            res.status(200).send({messange: "Đăng nhập thành công", token})
         }else{
-            res.send("Tài khoản mật khẩu không chính xác")
+            res.status(200).send("Tài khoản mật khẩu không chính xác")
         }
     } catch (error) {
-        res.send(error)
+        res.status(500).send(error)
     }
     
 }
 
+const uploadAvatar = async (req, res) => {
+    const id = req.params.id;
+    try {
+        console.log(req.file)
+        const user = await User.update({ avatar: req.file.path}, {
+            where: {
+                id: id
+            }
+        })
+        await res.status(200).send("Cập nhật ảnh thành công!!!");
+    } catch (error) {
+        res.status(500).send(error)
+    }
+}
+
 module.exports = {
     register,
-    login
+    login,
+    uploadAvatar
 }

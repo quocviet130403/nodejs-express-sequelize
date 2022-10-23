@@ -6,7 +6,7 @@ const { sequelize } = require("./models")
 const app = express();
 app.use(express.json())
 const publicPathDirectory = path.join(__dirname,'./public');
-app.use(express.static(publicPathDirectory));
+app.use('/public',express.static(publicPathDirectory));
 app.use("/api/v1", rootRouter)
 
 sequelize.authenticate()
