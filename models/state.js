@@ -22,9 +22,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     address: {
       type: DataTypes.STRING,
-      validate: {
-        max: 50,
-      }
     },
     province: {
       type: DataTypes.STRING,
