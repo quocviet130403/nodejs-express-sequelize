@@ -1,13 +1,14 @@
 const { User } = require("../models");
-var jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const gravatar = require('gravatar');
 
 const register = async (req, res) => {
     const { name, phone, email, password, note } = req.body;
     try {
         const salt = bcrypt.genSaltSync(10);
         const hashPass = bcrypt.hashSync(password, salt);
-        const newUser = await User.create({ name, phone, password: hashPass, email, note });
+        const newUser = await User.create({ name, phone, password: hashPass, email, note, avatar: gravatar.url(email) });
         res.status(200).send(newUser);
     } catch (error) {   
         res.status(500).send(error);
